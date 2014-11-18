@@ -29,15 +29,18 @@ game.playerEntity = me.Entity.extend({
             this.body.vel.x=0;
         }
         if(this.body.vel.x !== 0){
-            if(!this.renderable.isCurrentAnimation("smallwalk")){
+            if(!this.renderable.isCurrentAnimation("smallWalk")){
               this.renderable.setCurrentAnimation("smallWalk");
               this.renderable.setAnimationFrame();
           }
-        }else{
+        }else{this.renderable.setCurrentAnimation("idle");
             
         }
     this.body.update(delta);
     this._super(me.Entity, "update",[delta]);
         return true;
+    
+            
+    
     }
 });
