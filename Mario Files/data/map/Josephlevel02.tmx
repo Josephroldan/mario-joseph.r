@@ -13,16 +13,18 @@
  </tileset>
  <layer name="Tile Layer 1" width="16" height="9">
   <data encoding="base64" compression="zlib">
-   eJxjYCAfzKJA73AAlPh/Fg79HkDsg4S98JhhhUWvJxDbIWFvPGZYArEvhRgATHcLAg==
+   eJxjYCAfzKJA73AAlPh/Fg79HkDsg4S98JhhhUWvJxDbIWFvPGZYArEvEkbXi2yGLw4MAD+3CrE=
   </data>
  </layer>
- <layer name="collision" width="16" height="9" opacity="0">
+ <layer name="collision" width="16" height="9" opacity="0.32">
+  <properties>
+   <property name="type" value="solid"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFgwmsBuJ1SHgtBXoJmWGJQz0pGACoxxM6
   </data>
  </layer>
  <objectgroup name="trigger-entities">
   <object name="level-trigger" x="1052" y="420" width="68" height="140"/>
-  <object x="1566" y="580"/>
  </objectgroup>
 </map>
