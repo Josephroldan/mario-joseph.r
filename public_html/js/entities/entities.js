@@ -23,7 +23,9 @@ game.playerEntity = me.Entity.extend({
     },
     
     update:function(delta){
+        console.log("update");
         if(me.input.isKeyPressed("right")){
+            console.log("right");
             this.body.vel.x += this.body.accel.x *me.timer.tick;
           
         }else{
@@ -62,11 +64,11 @@ game.LevelTrigger = me.Entity.extend({
         this._super(me.Entity, 'init', [x, y, settings]);
         this.body.onCollision =this.onCollision.bind(this);
         this.level = settings.level;
-        this.xSpawn = settings.xSpawn
-        this.ySpawn = settings.ySpawn
+        this.xSpawn = settings.xSpawn;
+        this.ySpawn = settings.ySpawn;
     },
     onCollision: function(){
-        this.body.netCollisionMask(me.collision.types.NO_OBJECT);
+        this.body.setCollisionMask(me.collision.types.NO_OBJECT);
         me.levelDirector.loadLevel(this.level);
         me.state.current().resetPlayer(this.xSpawn, this.ySpawn);
     }
