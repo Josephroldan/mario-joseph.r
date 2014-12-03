@@ -4,7 +4,7 @@ game.TitleScreen = me.ScreenObject.extend({
 	 */
 	onResetEvent: function() {	
 	var titleImage = new me.Sprite(0, 0, me.loader.getImage("title-screen"));
-          me.game.world.addChild(titleImage, 1);
+          me.game.world.addChild(titleImage, -10);
             me.input.bindKey(me.input.KEY.ENTER, "start");// TODO
 	
         me.game.world.addChild(new(me.Renderable.extend({
@@ -14,6 +14,7 @@ game.TitleScreen = me.ScreenObject.extend({
             },
             draw: function(renderer){
                 this.font.draw(renderer.getContext(), "Mario", 450, 130)
+                this.font.draw(renderer.getContext(), "Press enter to play unless you're scared", 250, 530)
             }
         })));
             
@@ -30,5 +31,6 @@ game.TitleScreen = me.ScreenObject.extend({
 	 */
 	onDestroyEvent: function() {
 	me.input.unbindKey(me.input.KEY.ENTER)	; // TODO
+        me.event.unsubscribe(this.handeler);
 	}
 });
