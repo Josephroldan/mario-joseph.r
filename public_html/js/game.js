@@ -40,6 +40,7 @@ var game = {
 	// Run on game resources loaded.
 	"loaded" : function () {
             me.pool.register("mario", game.playerEntity, true);
+            me.pool.register("CompleteJerk", game.CompleteJerk);
             
             me.pool.register("levelTrigger", game.LevelTrigger);
             

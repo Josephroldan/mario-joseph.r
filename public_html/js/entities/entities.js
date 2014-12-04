@@ -1,83 +1,92 @@
 // TODO
 game.playerEntity = me.Entity.extend({
-    init: function(x, y, settings) {
-        this._super(me.Entity, "init", [x, y, {
-                image: "mario",
-                spritewidth: "128",
-                spriteheight: "128",
-                height: 128,
-                width: 128,
-                getShape: function() {
-                    return (new me.Rect(0, 0, 30, 128)).toPolygon();
-                }
-            }]);
-
-
+init: function(x, y, settings) {
+this._super(me.Entity, "init", [x, y, {
+image: "mario",
+        spritewidth: "128",
+        spriteheight: "128",
+        height: 128,
+        width: 128,
+        getShape: function() {
+        return (new me.Rect(0, 0, 30, 128)).toPolygon();
+        }
+}]);
         this.renderable.addAnimation("idle", [3]);
         this.renderable.addAnimation("smallWalk", [8, 9, 10, 11, 12, 13], 80);
-
         this.renderable.setCurrentAnimation("idle");
-
         this.body.setVelocity(5, 20);
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
-    },
-    update: function(delta) {
+},
+        update: function(delta) {
         if (me.input.isKeyPressed("left")) {
-            this.flipX(true);
-            this.body.vel.x -= this.body.accel.x * me.timer.tick;
+        this.flipX(true);
+                this.body.vel.x -= this.body.accel.x * me.timer.tick;
         }
 
         else if (me.input.isKeyPressed("right")) {
-            this.flipX(false);
-            this.body.vel.x += this.body.accel.x * me.timer.tick;
-            if (me.input.isKeyPressed("jump")) {
-                if (!this.body.jumping && !this.body.falling) {
-                    this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
-                    this.body.jumping = true;
-                }
-            }
+        this.flipX(false);
+                this.body.vel.x += this.body.accel.x * me.timer.tick;
+                if (me.input.isKeyPressed("jump")) {
+        if (!this.body.jumping && !this.body.falling) {
+        this.body.vel.y = - this.body.maxVel.y * me.timer.tick;
+                this.body.jumping = true;
+        }
+        }
         } else {
-            this.body.vel.x = 0;
+        this.body.vel.x = 0;
         }
 
 
         this.body.update(delta);
-        me.collision.check(this, true, this.collideHandler.bind(this), true);
-
-        if (this.body.vel.x !== 0) {
-            if (!this.renderable.isCurrentAnimation("smallWalk")) {
-                this.renderable.setCurrentAnimation("smallWalk");
+                me.collision.check(this, true, this.collideHandler.bind(this), true);
+                if (this.body.vel.x !== 0) {
+        if (!this.renderable.isCurrentAnimation("smallWalk")) {
+        this.renderable.setCurrentAnimation("smallWalk");
                 this.renderable.setAnimationFrame();
-            }
+        }
         } else {
-            this.renderable.setCurrentAnimation("idle");
-
+        this.renderable.setCurrentAnimation("idle");
         }
 
 
 
 
         this._super(me.Entity, "update", [delta]);
-        return true;
+                return true;
+        },
+        collideHandler: function(response) {
 
-
-
-    },
-    collideHandler: function(response) {
-
-    }
+        }
 });
-game.LevelTrigger = me.Entity.extend({
-    init: function(x, y, settings) {
+        game.LevelTrigger = me.Entity.extend({
+        init: function(x, y, settings) {
         this._super(me.Entity, 'init', [x, y, settings]);
-        this.body.onCollision = this.onCollision.bind(this);
-        this.level = settings.level;
-        this.xSpawn = settings.xSpawn;
-        this.ySpawn = settings.ySpawn;
-    },
-    onCollision: function() {
-        this.body.setCollisionMask(me.collision.types.NO_OBJECT);
-        me.levelDirector.loadLevel(this.level);
-        me.state.current().resetPlayer(this.xSpawn, this.ySpawn);
-    }
-});
+                this.body.onCollision = this.onCollision.bind(this);
+                this.level = settings.level;
+                this.xSpawn = settings.xSpawn;
+                this.ySpawn = settings.ySpawn;
+        },
+                onCollision: function() {
+                this.body.setCollisionMask(me.collision.types.NO_OBJECT);
+                        me.levelDirector.loadLevel(this.level);
+                        me.state.current().resetPlayer(this.xSpawn, this.ySpawn);
+                }
+        });
+        game.CompleteJerk = me.Entity.extend({
+        init: function(x, y, settings){
+        this._super(me.Entity, "init", [x, y, {
+        image: "fly",
+                spritewidth: "60",
+                spriteheight: "28",
+                height: 60,
+                width: 28,
+                getShape: function() {
+                return (new me.Rect(0, 0, 00, 28)).toPolygon();
+                }
+        }])
+        }
+    }),
+                update: function(delta){
+
+                }
+        });
