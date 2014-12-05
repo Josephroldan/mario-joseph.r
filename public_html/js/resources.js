@@ -3,11 +3,14 @@ game.resources = [
      * @example
      * {name: "example", type:"image", src: "data/img/example.png"},
      */
+    /*
+     * adds designs to code from images to put in levels
+     */
     {name: "background-tiles", type: "image", src: "data/img/background-tiles.png"},
     {name: "meta-tiles", type: "image", src: "data/img/meta-tiles.png"},
-    {name: "mario", type: "image", src: "data/img/player1.png"},
+    {name: "mario", type: "image", src: "data/img/player2.png"},
     {name: "title-screen", type: "image", src: "data/img/title-screen.png"},
-    {name:"fly",type:"image", src: "data/img/fly-spritesheet.png"},
+    {name:"fly",type:"image", src: "data/img/slime-spritesheet.png"},
     /* Atlases 
      * @example
      * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},
