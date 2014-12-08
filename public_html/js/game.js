@@ -41,7 +41,7 @@ var game = {
 	"loaded" : function () {
             me.pool.register("mario", game.playerEntity, true);
             me.pool.register("CompleteJerk", game.CompleteJerk);
-            
+            me.pool.register("steroids", game.Steroids);
             me.pool.register("levelTrigger", game.LevelTrigger);
             
 		me.state.set(me.state.MENU, new game.TitleScreen());

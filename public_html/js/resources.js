@@ -10,7 +10,8 @@ game.resources = [
     {name: "meta-tiles", type: "image", src: "data/img/meta-tiles.png"},
     {name: "mario", type: "image", src: "data/img/player2.png"},
     {name: "title-screen", type: "image", src: "data/img/title-screen.png"},
-    {name:"fly",type:"image", src: "data/img/slime-spritesheet.png"},
+    {name:"slime",type:"image", src: "data/img/slime-spritesheet.png"},
+     {name:"steroids",type:"image", src: "data/img/mushroom.png"},
     /* Atlases 
      * @example
      * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},
