@@ -1,7 +1,11 @@
 // TODO
 game.playerEntity = me.Entity.extend({
+    //function initializes character
     init: function(x, y, settings) {
         this._super(me.Entity, "init", [x, y, {
+                /*
+                 * determines proper size of character
+                 */
                 image: "mario",
                 spritewidth: "64",
                 spriteheight: "64",
@@ -11,6 +15,11 @@ game.playerEntity = me.Entity.extend({
                     return (new me.Rect(64, 64, 64, 64)).toPolygon();
                 }
             }]);
+        /*
+         * '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+         * Generates all animations for the character
+         * '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+         */
         this.renderable.addAnimation("idle", [39]);
         //sets standiing animation
         this.renderable.addAnimation("smallWalk", [143, 144, 145, 146, 147, 148, 149, 150, 151], 80);
@@ -32,11 +41,18 @@ game.playerEntity = me.Entity.extend({
             this.body.vel.x -= this.body.accel.x * me.timer.tick;
             // sets velocity and speed for moving left
         }
-
+        /*
+         * ------------------------------------------------------------------------------------------------------------
+         * tells to move the character right  when pressing the right arrow key
+         * ------------------------------------------------------------------------------------------------------------
+         */
         else if (me.input.isKeyPressed("right")) {
             this.flipX(false);
             //keeps animations from being flipped
             this.body.vel.x += this.body.accel.x * me.timer.tick;
+            /*zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+             *allows jumping using space key 
+             */
             if (me.input.isKeyPressed("jump")) {
                 if (!this.body.jumping && !this.body.falling) {
                     this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
@@ -55,6 +71,7 @@ game.playerEntity = me.Entity.extend({
                 if (!this.renderable.isCurrentAnimation("smallWalk")) {
                     this.renderable.setCurrentAnimation("smallWalk");
                     this.renderable.setAnimationFrame();
+                    // used seperately for normal size walking
                 }
             } else {
                 this.renderable.setCurrentAnimation("idle");
@@ -65,9 +82,11 @@ game.playerEntity = me.Entity.extend({
                 if (!this.renderable.isCurrentAnimation("bigWalk")) {
                     this.renderable.setCurrentAnimation("bigWalk");
                     this.renderable.setAnimationFrame();
+                    // starts and activates mushroom walk sequence
                 }
             } else {
                 this.renderable.setCurrentAnimation("bigIdle");
+                //activates mushroom standing animation
             }
         }
 
@@ -80,17 +99,22 @@ game.playerEntity = me.Entity.extend({
 
         if (response.b.type === "CompleteJerk") {
             if (ydif <= -115) {
+                // gives value for killing jerk
                 response.b.alive = false;
             } else {
+                console.log("hit");
                 if (this.big) {
                     this.big = false;
-                    this.body.vel.y -= this.body.accel.y * me.timer.tick;
-                    this.jumping = true;
-                } else {
+                    response.b.alive = false;
+                    // destroy's mushrooms effects but kill badguy
+                    console.log("big");
+                } else if (response.b.alive) {
                     me.state.change(me.state.MENU);
+                    // takes you to menu screen when dead
                 }
             }
         }
+        //code that tells mario to eat the mushroom and have it disappear
         else if (response.b.type === "steroids") {
             this.big = true;
             this.renderable.setCurrentAnimation("bigIdle");
@@ -165,7 +189,7 @@ game.CompleteJerk = me.Entity.extend({
         }
 
         this.body.update(delta);
-
+// allows the character to update and move  within its boundaries 
         this._super(me.Entity, "update", [delta]);
         return true;
     },
@@ -186,8 +210,9 @@ game.Steroids = me.Entity.extend({
                     return (new me.Rect(0, 0, 64, 64)).toPolygon();
                 }
             }]);
+        // tells game for checking for shroom
         me.collision.check(this);
-        this.type = "Steroids";
+        this.type = "steroids";
     }
 
 });
