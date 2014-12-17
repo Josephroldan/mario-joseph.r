@@ -40,7 +40,7 @@
   <object name="CompleteJerk" x="696" y="776" width="280" height="76"/>
  </objectgroup>
  <objectgroup name="CollectableEntities">
-  <object name="Steroids" x="140" y="764" width="68" height="80"/>
+  <object name="godLike" x="140" y="764" width="68" height="80"/>
   <object name="Steroids" x="1124" y="560" width="60" height="60"/>
   <object name="Steroids" x="1884" y="632" width="76" height="72"/>
  </objectgroup>

@@ -111,6 +111,10 @@ game.playerEntity = me.Entity.extend({
                 } else if (response.b.alive) {
                     me.state.change(me.state.MENU);
                     // takes you to menu screen when dead
+                } else {
+                    if (this.godLike = true) {
+                        response.b.alive = false;
+                    }
                 }
             }
         }
@@ -119,8 +123,12 @@ game.playerEntity = me.Entity.extend({
             this.big = true;
             this.renderable.setCurrentAnimation("bigIdle");
             me.game.world.removeChild(response.b);
+        } else {
+            if (response.b.type === "godLike") {
+                this.godLike = true;
+                console.log("god");
+            }
         }
-
     }
 });
 game.LevelTrigger = me.Entity.extend({
@@ -213,6 +221,25 @@ game.Steroids = me.Entity.extend({
         // tells game for checking for shroom
         me.collision.check(this);
         this.type = "steroids";
+    }
+
+});
+game.godLike = me.Entity.extend({
+    init: function(x, y, settings) {
+        this._super(me.Entity, "init", [x, y, {
+                image: "godLike",
+                //shows game width and height of badguy
+                spritewidth: "64",
+                spriteheight: "64",
+                height: 64,
+                width: 64,
+                getShape: function() {
+                    return (new me.Rect(0, 0, 64, 64)).toPolygon();
+                }
+            }]);
+        // tells game for checking for shroom
+        me.collision.check(this);
+        this.type = "godLike";
     }
 
 });

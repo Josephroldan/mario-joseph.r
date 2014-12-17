@@ -44,6 +44,7 @@ var game = {
         me.pool.register("CompleteJerk", game.CompleteJerk);
         me.pool.register("steroids", game.Steroids);
         me.pool.register("levelTrigger", game.LevelTrigger);
+        me.pool.register("godLike", game.godLike)
 
         /*
          * =================================================================
